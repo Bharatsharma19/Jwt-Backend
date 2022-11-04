@@ -6,14 +6,14 @@ app.use(express.json());
 const users = [
   {
     id: "1",
-    username: "john",
-    password: "John0908",
+    username: "vivek",
+    password: "Vivek7999",
     isAdmin: true,
   },
   {
     id: "2",
-    username: "jane",
-    password: "Jane0908",
+    username: "test",
+    password: "Test1234",
     isAdmin: false,
   },
 ];
@@ -21,10 +21,10 @@ const users = [
 let refreshTokens = [];
 
 app.post("/api/refresh", (req, res) => {
-  //take the refresh token from the user
+  // Take the refresh token from the user
   const refreshToken = req.body.token;
 
-  //send error if there is no token or it's invalid
+  // Send error if there is no token or it's invalid
   if (!refreshToken) return res.status(401).json("You are not authenticated!");
   if (!refreshTokens.includes(refreshToken)) {
     return res.status(403).json("Refresh token is not valid!");
@@ -43,8 +43,6 @@ app.post("/api/refresh", (req, res) => {
       refreshToken: newRefreshToken,
     });
   });
-
-  //if everything is ok, create new access token, refresh token and send to user
 });
 
 const generateAccessToken = (user) => {
@@ -63,7 +61,7 @@ app.post("/api/login", (req, res) => {
     return u.username === username && u.password === password;
   });
   if (user) {
-    //Generate an access token
+    // Generate an Access Token
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshToken(user);
     refreshTokens.push(refreshToken);
