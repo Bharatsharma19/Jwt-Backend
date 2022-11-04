@@ -65,14 +65,17 @@ app.post("/api/login", (req, res) => {
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshToken(user);
     refreshTokens.push(refreshToken);
-    res.json({
+    res.status(200).json({
+      status: true,
       username: user.username,
       isAdmin: user.isAdmin,
       accessToken,
       refreshToken,
     });
   } else {
-    res.status(400).json("Username or password incorrect!");
+    res
+      .status(400)
+      .json({ status: false, message: "Username or password incorrect!" });
   }
 });
 
