@@ -6,13 +6,13 @@ app.use(express.json());
 const users = [
   {
     id: "1",
-    username: "vivek",
+    username: "Vivek",
     password: "Vivek7999",
     isAdmin: true,
   },
   {
     id: "2",
-    username: "test",
+    username: "Test",
     password: "Test1234",
     isAdmin: false,
   },
@@ -60,6 +60,7 @@ app.post("/api/login", (req, res) => {
   const user = users.find((u) => {
     return u.username === username && u.password === password;
   });
+
   if (user) {
     // Generate an Access Token
     const accessToken = generateAccessToken(user);
@@ -75,7 +76,7 @@ app.post("/api/login", (req, res) => {
   } else {
     res
       .status(400)
-      .json({ status: false, message: "Username or password incorrect!" });
+      .json({ status: false, message: "Username or Password is Incorrect!" });
   }
 });
 
